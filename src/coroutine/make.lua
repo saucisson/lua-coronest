@@ -39,7 +39,7 @@ return function (tag)
     elseif tag == t then
       return status, ...
     else
-      coroutine.yield (tag, ...)
+      yield (tag, ...)
     end
   end
 
