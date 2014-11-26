@@ -39,7 +39,7 @@ return function (tag)
     elseif tag == t then
       return status, ...
     else
-      yield (tag, ...)
+      return status, yield (t, ...)
     end
   end
 
