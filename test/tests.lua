@@ -56,16 +56,14 @@ describe ("Nested coroutines", function ()
 
   it ("should work for nested coroutines", function ()
     local make = require "coroutine.make"
-    local c1 = make ()
-    local c2 = make ()
+    local c1 = make "c1"
+    local c2 = make "c2"
     local coro1, coro2
     coro1 = c1.create (function ()
       local s1, v1 = c2.resume (coro2)
-      print ("coro1", "s1", s1, "v1", v1)
       assert.is_true (s1)
       assert.are.equal (v1, 1)
       local s2, v2 = c2.resume (coro2)
-      print ("coro1", "s2", s2, "v2", v2)
       assert.is_true (s2)
       assert.are.equal (v2, 3)
       return 4
@@ -73,18 +71,16 @@ describe ("Nested coroutines", function ()
     coro2 = c2.create (function ()
       c2.yield (1)
       c1.yield (2)
-      print "resumed"
       c2.yield (3)
     end)
     local s1, v1 = c1.resume (coro1)
-    print ("main", "s1", s1, "v1", v1)
     assert.is_true (s1)
     assert.are.equal (v1, 2)
     local s2, v2 = c1.resume (coro1)
-    print ("main", "s2", s2, "v2", v2)
     assert.is_true (s2)
-    assert.are.equal (v1, 4)
+    assert.are.equal (v2, 4)
   end)
 
   pending "TODO"
+
 end)

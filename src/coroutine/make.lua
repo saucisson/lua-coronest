@@ -33,13 +33,15 @@ return function (tag)
     end
   end
 
-  local function for_resume (status, t, ...)
+  local function for_resume (co, status, t, ...)
     if not status then
       return status, t, ...
-    elseif tag == t then
+    end
+    if tag == t then
       return status, ...
     else
-      return status, yield (t, ...)
+      yield (t, ...)
+      return coroutine.resume (co, ...)
     end
   end
 
@@ -50,7 +52,7 @@ return function (tag)
   end
 
   function coroutine.resume (co, ...)
-    return for_resume (resume (co, ...))
+    return for_resume (co, resume (co, ...))
   end
 
   function coroutine.running ()
@@ -64,7 +66,7 @@ return function (tag)
   function coroutine.wrap (f)
     local co = coroutine.create (f)
     return function (...)
-       return for_wrap (resume (co, ...))
+       return for_wrap (coroutine.resume (co, ...))
     end
   end
 
