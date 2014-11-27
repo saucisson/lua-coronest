@@ -64,7 +64,7 @@ return function (tag)
       return tag, f (...)
     end)
     return function (...)
-       return for_wrap (co, co (...))
+      return for_wrap (co, co (...))
     end
   end
 
