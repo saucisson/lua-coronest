@@ -25,9 +25,9 @@ return function (tag)
   local coroutine = {}
   tag = tag or {}
 
-  local function for_wrap (status, t, ...)
+  local function for_wrap (status, ...)
     if not status then
-      error (t, ...)
+      error (...)
     else
       return ...
     end
@@ -66,7 +66,7 @@ return function (tag)
   function coroutine.wrap (f)
     local co = coroutine.create (f)
     return function (...)
-       return for_wrap (coroutine.resume (co, ...))
+      return for_wrap (coroutine.resume (co, ...))
     end
   end
 
