@@ -14,32 +14,38 @@
 -- module to allow the definition of complex behaviors with nested
 -- coroutines.
 
-local create  = coroutine.create
-local resume  = coroutine.resume
-local running = coroutine.running
-local status  = coroutine.status
---local wrap    = coroutine.wrap
-local yield   = coroutine.yield
+local select      = select
+local create      = coroutine.create
+local isyieldable = coroutine.isyieldable
+local resume      = coroutine.resume
+local running     = coroutine.running
+local status      = coroutine.status
+local wrap        = coroutine.wrap
+local yield       = coroutine.yield
 
 return function (tag)
-  local coroutine = {}
+  local coroutine = {
+    isyieldable = isyieldable,
+    running     = running,
+    status      = status,
+  }
   tag = tag or {}
 
-  local function for_wrap (status, t, ...)
-    if not status then
-      error (t, ...)
+  local function for_wrap (co, ...)
+    if tag == ... then
+      return select (2, ...)
     else
-      return ...
+      return for_wrap (co, co (yield (...)))
     end
   end
 
-  local function for_resume (status, t, ...)
+  local function for_resume (co, status, ...)
     if not status then
-      return status, t, ...
-    elseif tag == t then
       return status, ...
+    elseif tag == ... then
+      return status, select (2, ...)
     else
-      coroutine.yield (tag, ...)
+      return for_resume (co, resume (co, yield (...)))
     end
   end
 
@@ -50,21 +56,15 @@ return function (tag)
   end
 
   function coroutine.resume (co, ...)
-    return for_resume (resume (co, ...))
-  end
-
-  function coroutine.running ()
-    return running ()
-  end
-
-  function coroutine.status (co)
-    return status (co)
+    return for_resume (co, resume (co, ...))
   end
 
   function coroutine.wrap (f)
-    local co = coroutine.create (f)
+    local co = wrap (function (...)
+      return tag, f (...)
+    end)
     return function (...)
-       return for_wrap (resume (co, ...))
+       return for_wrap (co, co (...))
     end
   end
 
