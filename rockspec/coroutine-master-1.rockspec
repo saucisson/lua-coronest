@@ -2,7 +2,7 @@ package = "coroutine"
 version = "master-1"
 
 source = {
-   url = "git://github.com/saucisson/nested-coroutine",
+   url = "git://github.com/saucisson/nested-coroutines",
 }
 
 description = {
