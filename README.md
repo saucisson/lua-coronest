@@ -19,7 +19,9 @@ Usage
 Everywhere you are using the standard Lua `coroutine` module,
 replace it with an instance of the nested coroutines:
 
-    local coroutine = import "coroutine.make" ()
+```lua
+    local coroutine = require "coroutine.make" ()
+```
 
 For an example, please look at
 [the example](https://github.com/saucisson/nested-coroutines/tree/master/examples/usage.lua).
