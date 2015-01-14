@@ -3,7 +3,7 @@
 --
 -- Coroutines are a powerful notion to suspend and resume execution of
 -- lightweight threads. It can be used for instance for scheduling in
--- [copas](http://keplerproject.github.io/copas/, or for
+-- [copas](http://keplerproject.github.io/copas/), or for
 -- [iteration](http://www.lua.org/pil/9.3.html).
 --
 -- When mixing these two uses, a problem arises: there is no way to specify
