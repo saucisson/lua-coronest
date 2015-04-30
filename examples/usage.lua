@@ -74,10 +74,10 @@ end))
 -- nested coroutines module, with only slight changes in our code.
 
 -- First, import a factory for coroutine modules:
-coroutine.make = require "coroutine.make"
+local coromake = require "coroutine.make"
 
 -- Create a coroutine module instance specific to the scheduler:
-local scheduler_coroutine = coroutine.make ()
+local scheduler_coroutine = coromake ()
 
 -- And use it within the scheduler:
 local function schedule (thread)
@@ -88,7 +88,7 @@ local function schedule (thread)
 end
 
 -- Create a coroutine module instance specific to the iterator:
-local iterator_coroutine = coroutine.make ()
+local iterator_coroutine = coromake ()
 
 -- And use it within the iterator. Depending on the `yield` target,
 -- we use a different coroutine module. It ensures that the `yield`s
