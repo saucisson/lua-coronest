@@ -1,7 +1,7 @@
 print "testing coroutines"
 
-local debug = require'debug'
 local coroutine = require "coroutine.make" ()
+local debug = require'debug'
 
 local f
 
@@ -264,7 +264,7 @@ else
   print "testing yields inside hooks"
 
   local turn
-  
+
   function fact (t, x)
     assert(turn == t)
     if x == 0 then return 1
@@ -291,45 +291,8 @@ else
 
   assert(B/A == 11)
 
-  local line = debug.getinfo(1, "l").currentline + 2    -- get line number
-  local function foo ()
-    local x = 10    --<< this line is 'line'
-    x = x + 10
-    _G.XX = x
-  end
-
-  -- testing yields in line hook
-  local co = coroutine.wrap(function ()
-    T.sethook("setglobal X; yield 0", "l", 0); foo(); return 10 end)
-
-  _G.XX = nil;
-  _G.X = nil; co(); assert(_G.X == line)
-  _G.X = nil; co(); assert(_G.X == line + 1)
-  _G.X = nil; co(); assert(_G.X == line + 2 and _G.XX == nil)
-  _G.X = nil; co(); assert(_G.X == line + 3 and _G.XX == 20)
-  assert(co() == 10)
-
-  -- testing yields in count hook
-  co = coroutine.wrap(function ()
-    T.sethook("yield 0", "", 1); foo(); return 10 end)
-
-  _G.XX = nil;
-  local c = 0
-  repeat c = c + 1; local a = co() until a == 10
-  assert(_G.XX == 20 and c == 10)
-
-  co = coroutine.wrap(function ()
-    T.sethook("yield 0", "", 2); foo(); return 10 end)
-
-  _G.XX = nil;
-  local c = 0
-  repeat c = c + 1; local a = co() until a == 10
-  assert(_G.XX == 20 and c == 5)
-  _G.X = nil; _G.XX = nil
-
-
   print "testing coroutine API"
-  
+
   -- reusing a thread
   assert(T.testC([[
     newthread      # create thread
@@ -665,11 +628,11 @@ co = coroutine.wrap(function (...) return
        ]],
        [[  # continuation
          getctx
-         yieldk 2 3 
+         yieldk 2 3
        ]],
        [[  # continuation
          getctx
-         yieldk 2 4 
+         yieldk 2 4
        ]],
        [[  # continuation
           pushvalue 6; pushnum 10; pushnum 20;
@@ -714,16 +677,6 @@ a,b = T.testC(
        [[ pushstring print; pcallk 0 0 12    # error
           getctx; return 2 ]])
 assert(a == "OK" and b == 0)   -- no ctx outside continuations
-
-
--- bug in nCcalls
-local co = coroutine.wrap(function ()
-  local a = {pcall(pcall,pcall,pcall,pcall,pcall,pcall,pcall,error,"hi")}
-  return pcall(assert, table.unpack(a))
-end)
-
-local a = {co()}
-assert(a[10] == "hi")
 
 
 print'OK'
