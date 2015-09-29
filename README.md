@@ -18,7 +18,7 @@ Install
 
 This module is available as a Lua rock:
 
-````bash
+````sh
     luarocks install coronest
 ````
 
@@ -55,7 +55,7 @@ This module comes with some tests:
   but using the `coroutine.make` instead of standard coroutines;
   they allow to check that nested coroutines do not break anything.
 
-````lua
+````sh
     lua    tests/nested.lua
     lua5.1 tests/lua-5.1.lua
     lua5.2 tests/lua-5.2.0.lua
