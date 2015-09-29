@@ -23,11 +23,11 @@ return function (tag)
     end
   end
 
-  local function for_resume (co, status, ...)
-    if not status then
-      return status, ...
+  local function for_resume (co, st, ...)
+    if not st then
+      return st, ...
     elseif tag == ... then
-      return status, select (2, ...)
+      return st, select (2, ...)
     else
       return for_resume (co, resume (co, yield (...)))
     end
