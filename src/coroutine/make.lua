@@ -1,19 +1,3 @@
--- Coroutines that allow nesting
--- =============================
---
--- Coroutines are a powerful notion to suspend and resume execution of
--- lightweight threads. It can be used for instance for scheduling in
--- [copas](http://keplerproject.github.io/copas/), or for
--- [iteration](http://www.lua.org/pil/9.3.html).
---
--- When mixing these two uses, a problem arises: there is no way to specify
--- which `coroutine.resume` should intercept a `coroutine.yield`.
--- See: http://stackoverflow.com/questions/27123966/lua-nested-coroutines
---
--- This module provides a thin wrapper around the standard `coroutine`
--- module to allow the definition of complex behaviors with nested
--- coroutines.
-
 local select      = select
 local create      = coroutine.create
 local isyieldable = coroutine.isyieldable
