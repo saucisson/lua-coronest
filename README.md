@@ -13,6 +13,15 @@ This module provides a thin wrapper around the standard `coroutine`
 module to allow the definition of complex behaviors with nested
 coroutines.
 
+Install
+-------
+
+This module is available as a Lua rock:
+
+````bash
+    luarocks install coronest
+````
+
 Usage
 -----
 
