@@ -23,12 +23,44 @@ replace it with an instance of the nested coroutines:
     local coroutine = require "coroutine.make" ()
 ```
 
-For an example, please look at
-[the example](https://github.com/saucisson/nested-coroutines/tree/master/examples/usage.lua).
+For an example, please look at [the example](examples/usage.lua).
+
+Compatibility and Testing
+-------------------------
+
+Nested coroutines should be compatible with any version of Lua supporting
+coroutines (well, at least from `5.1`). As the module is written in pure Lua,
+it also works with [LuaJIT](http://luajit.org/).
+
+This module comes with some tests:
+
+* [nested](tests/nested.lua) are important checks on the behavior of
+  nested coroutines;
+* [lua-5.1](tests/lua-5.1.lua);
+* [lua-5.2.0](tests/lua-5.2.0.lua);
+* [lua-5.2.1](tests/lua-5.2.1.lua);
+* [lua-5.2.2](tests/lua-5.2.2.lua);
+* [lua-5.3.0](tests/lua-5.3.0.lua);
+* [lua-5.3.1](tests/lua-5.3.1.lua) are tests imported from the
+  [Lua testsuite](http://www.lua.org/tests/),
+  but using the `coroutine.make` instead of standard coroutines;
+  they allow to check that nested coroutines do not break anything.
+
+````lua
+    lua    tests/nested.lua
+    lua5.1 tests/lua-5.1.lua
+    lua5.2 tests/lua-5.2.0.lua
+    lua5.2 tests/lua-5.2.1.lua
+    lua5.2 tests/lua-5.2.2.lua
+    lua5.3 tests/lua-5.3.0.lua
+    lua5.3 tests/lua-5.3.1.lua
+````
 
 Contributors
 ------------
 
-This module has been built after the [following discussion on StackOverflow](http://stackoverflow.com/questions/27123966/lua-nested-coroutines).
-Even if [Alban Linard (saucisson)](https://github.com/saucisson) owns this repository,
-the main contributor is [Philipp Janda (siffiejoe)](https://github.com/siffiejoe).
+This module has been built after
+[this discussion on StackOverflow](http://stackoverflow.com/questions/27123966).
+Even if [Alban Linard (saucisson)](https://github.com/saucisson) owns this
+repository, the main contributor is
+[Philipp Janda (siffiejoe)](https://github.com/siffiejoe).
