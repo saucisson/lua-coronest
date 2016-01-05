@@ -28,7 +28,7 @@ script:
   - VERSION=$(lua -e "print (_VERSION:match '%d%.%d')") && for file in test/lua-$VERSION*; do lua -lluacov $file; done
 
 after_success:
-  - luacov-coveralls
+  - luacov-coveralls --exclude "*" --include "coroutine/make"
 
 notifications:
   recipients:
