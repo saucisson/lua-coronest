@@ -1,5 +1,7 @@
-Coroutines that allow nesting
-=============================
+[![Build Status](https://travis-ci.org/saucisson/lua-coronest.svg?branch=master)](https://travis-ci.org/saucisson/lua-coronest)
+[![Coverage Status](https://coveralls.io/repos/saucisson/lua-coronest/badge.svg?branch=master&service=github)](https://coveralls.io/github/saucisson/lua-coronest?branch=master)
+
+# Coroutines that allow nesting
 
 Coroutines are a powerful notion to suspend and resume execution of
 lightweight threads. It can be used for instance for scheduling,
@@ -13,17 +15,15 @@ This module provides a thin wrapper around the standard `coroutine`
 module to allow the definition of complex behaviors with nested
 coroutines.
 
-Install
--------
+## Install
 
-This module is available as a Lua rock:
+This module is available in [luarocks](https://luarocks.org):
 
 ````sh
     luarocks install coronest
 ````
 
-Usage
------
+## Usage
 
 Everywhere you are using the standard Lua `coroutine` module,
 replace it with an instance of the nested coroutines:
@@ -34,8 +34,7 @@ replace it with an instance of the nested coroutines:
 
 For an example, please look at [the example](examples/usage.lua).
 
-Compatibility and Testing
--------------------------
+## Compatibility and Testing
 
 Nested coroutines should be compatible with any version of Lua supporting
 coroutines (well, at least from `5.1`). As the module is written in pure Lua,
@@ -65,8 +64,7 @@ This module comes with some tests:
     lua5.3 tests/lua-5.3.1.lua
 ````
 
-Contributors
-------------
+# Contributors
 
 This module has been built after
 [this discussion on StackOverflow](http://stackoverflow.com/questions/27123966).
