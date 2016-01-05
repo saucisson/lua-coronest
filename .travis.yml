@@ -1,0 +1,38 @@
+# Taken from https://github.com/kikito/middleclass/blob/master/.travis.yml
+os: linux
+language: python
+sudo: false
+
+env:
+  - LUA="lua=5.1"
+  - LUA="lua=5.2"
+  - LUA="lua=5.3"
+  - LUA="luajit=2.0"
+  - LUA="luajit=2.1"
+
+before_install:
+  - pip install hererocks
+  - hererocks lua_install -r^ --$LUA # --compat=none
+  - export PATH=$PATH:$PWD/lua_install/bin
+
+install:
+  - luarocks install luacheck
+  - luarocks install busted
+  - luarocks install luacov
+  - luarocks install luacov-coveralls
+  - luarocks make rockspec/*-master-1.rockspec
+
+script:
+  - luacheck --std max+busted src/*.lua
+  - lua -lluacov tests/nested.lua
+  - VERSION=$(lua -e "print (_VERSION:match '%d%.%d')") && for file in test/lua-$VERSION*; do lua -lluacov $file; done
+
+after_success:
+  - luacov-coveralls --exclude "lua_install"
+
+notifications:
+  recipients:
+    - alban@linard.fr
+  email:
+    on_success: change
+    on_failure: always
