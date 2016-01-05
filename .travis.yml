@@ -23,8 +23,8 @@ install:
   - luarocks make rockspec/*-master-1.rockspec
 
 script:
-  - luacheck --std max+busted src/*.lua
-  - lua -lluacov tests/nested.lua
+  - luacheck --std max+busted src/coroutine/*.lua
+  - lua -lluacov test/nested.lua
   - VERSION=$(lua -e "print (_VERSION:match '%d%.%d')") && for file in test/lua-$VERSION*; do lua -lluacov $file; done
 
 after_success:
