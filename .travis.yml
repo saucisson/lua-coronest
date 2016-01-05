@@ -23,12 +23,12 @@ install:
   - luarocks make rockspec/*-master-1.rockspec
 
 script:
-  - luacheck --std max+busted src/coroutine/*.lua
-  - lua -lluacov test/nested.lua
+  - luacheck --std max+busted src/coroutine/*.lua test/nested.lua
+  - busted --verbose --coverage --pattern=nested test
   - VERSION=$(lua -e "print (_VERSION:match '%d%.%d')") && for file in test/lua-$VERSION*; do lua -lluacov $file; done
 
 after_success:
-  - luacov-coveralls --exclude "*" --include "coroutine/make.lua"
+  - luacov-coveralls --exclude "test" --exclude "lua_install"
 
 notifications:
   recipients:
