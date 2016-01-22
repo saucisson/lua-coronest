@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/saucisson/lua-coronest.svg?branch=master)](https://travis-ci.org/saucisson/lua-coronest)
 [![Coverage Status](https://coveralls.io/repos/saucisson/lua-coronest/badge.svg?branch=master&service=github)](https://coveralls.io/github/saucisson/lua-coronest?branch=master)
+[![Join the chat at https://gitter.im/saucisson/lua-coronest](https://badges.gitter.im/saucisson/lua-coronest.svg)](https://gitter.im/saucisson/lua-coronest?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # Coroutines that allow nesting
 
