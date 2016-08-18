@@ -23,16 +23,6 @@ build:
               "${dir}/bin/lua" -lluacov test/nested.lua
             fi
           done
-  after-steps:
-    - script:
-        name: "export to coveralls"
-        code: |
-          luacov-coveralls \
-            --repo-token "${COVERALLS_TOKEN}" \
-            --exclude share --exclude busted --exclude _spec \
-            --include coronest \
-            --root src/ \
-            --service-name "${WERCKER_GIT_BRANCH}"
     - script:
         name: "upload to luarocks"
         code: |
@@ -53,3 +43,13 @@ build:
             --api-key="${LUAROCKS_TOKEN}" \
             "coronest-${tag}-${count}.rockspec"
           cd ..
+  after-steps:
+    - script:
+        name: "export to coveralls"
+        code: |
+          luacov-coveralls \
+            --repo-token "${COVERALLS_TOKEN}" \
+            --exclude share --exclude busted --exclude _spec \
+            --include coronest \
+            --root src/ \
+            --service-name "${WERCKER_GIT_BRANCH}"
