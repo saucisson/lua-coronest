@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/saucisson/lua-coronest.svg?branch=master)](https://travis-ci.org/saucisson/lua-coronest)
+[![Build status](https://app.wercker.com/status/fabe64935aed6dc3b342c401d57d227f/s/master "wercker status")](https://app.wercker.com/project/byKey/fabe64935aed6dc3b342c401d57d227f)
 [![Coverage Status](https://coveralls.io/repos/saucisson/lua-coronest/badge.svg?branch=master&service=github)](https://coveralls.io/github/saucisson/lua-coronest?branch=master)
-[![Join the chat at https://gitter.im/saucisson/lua-coronest](https://badges.gitter.im/saucisson/lua-coronest.svg)](https://gitter.im/saucisson/lua-coronest?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Chat](https://badges.gitter.im/saucisson/lua-coronest.svg)](https://gitter.im/saucisson/lua-coronest?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # Coroutines that allow nesting
 

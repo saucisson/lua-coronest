@@ -1,8 +1,3 @@
-# Directories created by scripts:
-doc/
-coverage/
-coverage.txt
-
-# All swap files:
-*.swp
-*~
+.wercker
+rockspec/*.src.rock
+ENVIRONMENT

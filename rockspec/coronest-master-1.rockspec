@@ -2,7 +2,8 @@ package = "coronest"
 version = "master-1"
 
 source = {
-  url = "git://github.com/saucisson/lua-coronest",
+  url    = "git+https://github.com/saucisson/lua-coronest.git",
+  branch = "master",
 }
 
 description = {
