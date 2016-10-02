@@ -1,6 +1,7 @@
 print "testing closures and coroutines"
 
 local coroutine = require "coroutine.make" ()
+math.mod = math.mod or math.fmod
 
 local A,B = 0,{g=10}
 function f(x)
