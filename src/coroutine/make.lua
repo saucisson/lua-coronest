@@ -6,8 +6,9 @@ local running     = coroutine.running
 local status      = coroutine.status
 local wrap        = coroutine.wrap
 local yield       = coroutine.yield
+local coronest
 
-return function (tag)
+coronest = function (tag)
   local coroutine = {
     isyieldable = isyieldable,
     running     = running,
@@ -34,6 +35,11 @@ return function (tag)
   end
 
   function coroutine.create (f)
+  if getfenv then
+    getfenv(f).coroutine = coronest()
+  elseif debug and debug.getupvalue then
+    debug.getupvalue(f).coroutine = coronest()
+  end
     return create (function (...)
       return tag, f (...)
     end)
@@ -58,3 +64,4 @@ return function (tag)
 
   return coroutine
 end
+return coronest
