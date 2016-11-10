@@ -1,4 +1,6 @@
-box: cosyverif/lua-environments
+box:
+  id: cosyverif/docker-images:luax
+  cmd: /bin/bash
 build:
   steps:
     - script:
@@ -56,7 +58,5 @@ build:
         code: |
           luacov-coveralls \
             --repo-token "${COVERALLS_TOKEN}" \
-            --exclude share --exclude busted --exclude _spec \
-            --include coronest \
             --root src/ \
             --service-name "${WERCKER_GIT_BRANCH}"
