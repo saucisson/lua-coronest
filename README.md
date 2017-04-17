@@ -4,6 +4,8 @@
 
 # Coroutines that allow nesting
 
+[![Join the chat at https://gitter.im/saucisson/lua-coronest](https://badges.gitter.im/saucisson/lua-coronest.svg)](https://gitter.im/saucisson/lua-coronest?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Coroutines are a powerful notion to suspend and resume execution of
 lightweight threads. It can be used for instance for scheduling,
 as in [copas](http://keplerproject.github.io/copas/), or for
