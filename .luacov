@@ -1,11 +1,8 @@
 return {
-	statsfile   = "luacov.stats.out",
-	reportfile  = "luacov.report.out",
-	deletestats = true,
-	include = {
-    "src/",
-	};
-	exclude = {
-    "_spec",
-	},
+  statsfile   = "luacov.stats.out",
+  reportfile  = "luacov.report.out",
+  deletestats = true,
+  modules     = {
+    ["coroutine.make"] = "src/coroutine/make.lua",
+  },
 }
