@@ -1,0 +1,8 @@
+#! /bin/bash
+
+luacov-coveralls \
+  --repo-token "${COVERALLS_TOKEN}" \
+  --exclude share --exclude busted --exclude _spec \
+  --include coronest \
+  --root src/ \
+  --service-name "${TRAVIS_BRANCH}"
