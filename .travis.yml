@@ -34,11 +34,11 @@ script:
   - ${HOME}/bin/lua      test/lua-${TEST}.lua
 # - ./upload.coveralls
 
-jobs:
-  include:
-    - stage: deploy
-      script:
-        - ./upload.luarocks
+# jobs:
+#   include:
+#     - stage: deploy
+#       script:
+#         - ./upload.luarocks
 
 notifications:
   email:
