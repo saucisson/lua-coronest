@@ -1,5 +1,4 @@
-[![Build status](https://app.wercker.com/status/fabe64935aed6dc3b342c401d57d227f/s/master "wercker status")](https://app.wercker.com/project/byKey/fabe64935aed6dc3b342c401d57d227f)
-[![Coverage Status](https://coveralls.io/repos/saucisson/lua-coronest/badge.svg?branch=master&service=github)](https://coveralls.io/github/saucisson/lua-coronest?branch=master)
+[![Build status](https://travis-ci.org/saucisson/lua-coronest.svg?branch=master)](https://travis-ci.org/saucisson/lua-coronest.svg?branch=master)
 [![Chat](https://badges.gitter.im/saucisson/lua-coronest.svg)](https://gitter.im/saucisson/lua-coronest?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # Coroutines that allow nesting
@@ -33,7 +32,7 @@ replace it with an instance of the nested coroutines:
     local coroutine = require "coroutine.make" ()
 ```
 
-For an example, please look at [the example](examples/usage.lua).
+For an example, please look at `examples/usage.lua`.
 
 ## Compatibility and Testing
 
@@ -43,27 +42,10 @@ it also works with [LuaJIT](http://luajit.org/).
 
 This module comes with some tests:
 
-* [nested](tests/nested.lua) are important checks on the behavior of
-  nested coroutines;
-* [lua-5.1](tests/lua-5.1.lua);
-* [lua-5.2.0](tests/lua-5.2.0.lua);
-* [lua-5.2.1](tests/lua-5.2.1.lua);
-* [lua-5.2.2](tests/lua-5.2.2.lua);
-* [lua-5.3.0](tests/lua-5.3.0.lua);
-* [lua-5.3.1](tests/lua-5.3.1.lua) are tests imported from the
-  [Lua testsuite](http://www.lua.org/tests/),
-  but using the `coroutine.make` instead of standard coroutines;
+* `tests/nested.lua` are important checks on the behavior of nested coroutines;
+* `tests/lua-5.*.lua` are tests imported from the [Lua testsuite](http://www.lua.org/tests/),
+  but using `coroutine.make` instead of standard coroutines;
   they allow to check that nested coroutines do not break anything.
-
-````sh
-    lua    tests/nested.lua
-    lua5.1 tests/lua-5.1.lua
-    lua5.2 tests/lua-5.2.0.lua
-    lua5.2 tests/lua-5.2.1.lua
-    lua5.2 tests/lua-5.2.2.lua
-    lua5.3 tests/lua-5.3.0.lua
-    lua5.3 tests/lua-5.3.1.lua
-````
 
 # Contributors
 
