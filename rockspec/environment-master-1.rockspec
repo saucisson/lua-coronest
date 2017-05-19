@@ -1,4 +1,4 @@
-package = "coronest-env"
+package = "environment"
 version = "master-1"
 
 source = {
@@ -16,7 +16,6 @@ description = {
 
 dependencies = {
   "lua >= 5.1",
-  "busted",
   "cluacov",
   "luacheck",
   "luacov",
