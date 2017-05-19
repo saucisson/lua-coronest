@@ -27,9 +27,8 @@ install:
   - $HOME/bin/luarocks make rockspec/environment-master-1.rockspec
   - $HOME/bin/luarocks make rockspec/coronest-master-1.rockspec
 script:
-  - $HOME/bin/luacheck
+  - $HOME/bin/luacheck src/
   - $HOME/bin/lua test/lua-$TEST.lua
-
 
 notifications:
   email: false
