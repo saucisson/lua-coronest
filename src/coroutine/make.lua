@@ -1,6 +1,6 @@
 local select      = select
 local create      = coroutine.create
-local isyieldable = coroutine.isyieldable
+local isyieldable = coroutine.isyieldable -- luacheck: ignore
 local resume      = coroutine.resume
 local running     = coroutine.running
 local status      = coroutine.status
