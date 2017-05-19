@@ -34,29 +34,28 @@ script:
   - ${HOME}/bin/lua      test/lua-${TEST}.lua
 
 after_success:
-  - if [ "${CI}" = "true" && "${TRAVIS_BRANCH}" = "master" ]; then
+  - if [ "${TRAVIS_BRANCH}" = "master" ]; then
       tag=$(git describe --tags --abbrev=0 || echo "0.0")
       count=$(git rev-list --count HEAD ^"${tag}" || git rev-list --count HEAD)
     else
       tag="${TRAVIS_BRANCH}"
       count=$(git rev-list --count HEAD ^"${tag}" || git rev-list --count HEAD)
     fi
-    cd rockspec || exit 1
+    cd rockspec
     sed -e "s/master-1/${tag}-${count}/" \
         -e "s/master/${tag}/" \
-      "coronest-master-1.rockspec" \
+        "coronest-master-1.rockspec" \
       > "coronest-${tag}-${count}.rockspec"
     luarocks upload \
       --force \
       --api-key="${LUAROCKS_TOKEN}" \
       "coronest-${tag}-${count}.rockspec"
-    cd ..
-  - luacov-coveralls \
-      --repo-token "${COVERALLS_TOKEN}" \
-      --exclude share --exclude busted --exclude _spec \
-      --include coronest \
-      --root src/ \
-      --service-name "${TRAVIS_BRANCH}"
+  # - luacov-coveralls \
+  #     --repo-token "${COVERALLS_TOKEN}" \
+  #     --exclude share --exclude busted --exclude _spec \
+  #     --include coronest \
+  #     --root src/ \
+  #     --service-name "${TRAVIS_BRANCH}"
 
 notifications:
   email: false
