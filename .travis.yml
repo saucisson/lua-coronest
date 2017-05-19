@@ -19,9 +19,9 @@ env:
     - VERSION="5.3.3" TEST="5.3.3" WHAT="--lua"
     - VERSION="5.3.4" TEST="5.3.4" WHAT="--lua"
     - VERSION="2.0"   TEST="5.1"   WHAT="--luajit"
-    - VERSION="2.0"   TEST="5.3.4" WHAT="--luajit" COMPAT="--compat=5.2"
+    - VERSION="2.0"   TEST="5.2.2" WHAT="--luajit" COMPAT="--compat=5.2"
     - VERSION="2.1"   TEST="5.1"   WHAT="--luajit"
-    - VERSION="2.1"   TEST="5.3.4" WHAT="--luajit" COMPAT="--compat=5.2"
+    - VERSION="2.1"   TEST="5.2.2" WHAT="--luajit" COMPAT="--compat=5.2"
 
 install:
   - pip install hererocks
