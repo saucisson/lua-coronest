@@ -1,17 +1,19 @@
 #! /bin/bash
 
+if [ "${TRAVIS_EVENT_TYPE}" != "push" ]; then
+  exit 0
+fi
+
 if [ "${TRAVIS_BRANCH}" = "master" ]; then
   tag=$(git describe --tags --abbrev=0 || echo "0.0")
   count=$(git rev-list --count HEAD ^"${tag}" || git rev-list --count HEAD)
-  commit=$(git rev-parse HEAD)
 else
   tag="${TRAVIS_BRANCH}"
   count=$(git rev-list --count HEAD ^"${tag}" || git rev-list --count HEAD)
-  commit=$(git rev-parse HEAD)
 fi
 cd rockspec || exit 1
 sed -e "s/master-1/${tag}-${count}/" \
-    -e "s/master/${commit}/" \
+    -e "s/master/${TRAVIS_BRANCH}/" \
     "coronest-master-1.rockspec" \
   > "coronest-${tag}-${count}.rockspec"
 luarocks upload \
