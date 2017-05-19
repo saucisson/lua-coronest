@@ -1,5 +1,5 @@
 language: python
-sudo: required
+sudo: false
 dist: trusty
 os:
   - linux
@@ -22,12 +22,14 @@ env:
     - VERSION="2.1"   TEST="5.3.4" WHAT="--luajit" COMPAT="--compat=5.2"
 
 install:
-  - sudo pip install hererocks
-  - sudo hererocks --luarocks=^ $WHAT=$VERSION $COMPAT /usr
-  - sudo luarocks make rockspec/environment-master-1.rockspec
-  - sudo luarocks make rockspec/coronest-master-1.rockspec
+  - pip install hererocks
+  - hererocks --luarocks=^ $WHAT=$VERSION $COMPAT $HOME/
+  - $HOME/bin/luarocks make rockspec/environment-master-1.rockspec
+  - $HOME/bin/luarocks make rockspec/coronest-master-1.rockspec
 script:
-  - /usr/bin/lua test/lua-$TEST.lua
+  - $HOME/bin/luacheck
+  - $HOME/bin/lua test/lua-$TEST.lua
+
 
 notifications:
   email: false
