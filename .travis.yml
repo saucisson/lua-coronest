@@ -32,10 +32,13 @@ install:
 script:
   - ${HOME}/bin/luacheck src/
   - ${HOME}/bin/lua      test/lua-${TEST}.lua
+# - ./upload.coveralls
 
-after_success:
-  - ./upload.luarocks
-  # - ./upload.coveralls
+jobs:
+  include:
+    - stage: deploy
+      script:
+        - ./upload.luarocks
 
 notifications:
   email: false
