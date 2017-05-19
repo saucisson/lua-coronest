@@ -4,6 +4,8 @@ dist: trusty
 os:
   - linux
 env:
+  global:
+    secure: "A1+JPG9dUT6mHgLkJIzFJBBXwdUwRrUFjB4ArnTASXJe7iuBsRC1J24IqnMHdvvjZG4EuWFAstEKyI0WjSwZPZOK/UTRCS9JReG6F3CSITux9QSYcnGufiS72T8aBykVnOAxj5gY2YX7J/JiTRkoRcRnn4624R7bW3Q+crVWKog="
   matrix:
     - VERSION="5.1"   TEST="5.1"   WHAT="--lua"
     - VERSION="5.2"   TEST="5.2.2" WHAT="--lua"
@@ -23,12 +25,38 @@ env:
 
 install:
   - pip install hererocks
-  - hererocks --luarocks=^ $WHAT=$VERSION $COMPAT $HOME/
-  - $HOME/bin/luarocks make rockspec/environment-master-1.rockspec
-  - $HOME/bin/luarocks make rockspec/coronest-master-1.rockspec
+  - hererocks --luarocks=^ "${WHAT}=${VERSION}" "${COMPAT}" "${HOME}/"
+  - ${HOME}/bin/luarocks make rockspec/environment-master-1.rockspec
+  - ${HOME}/bin/luarocks make rockspec/coronest-master-1.rockspec
+
 script:
-  - $HOME/bin/luacheck src/
-  - $HOME/bin/lua test/lua-$TEST.lua
+  - ${HOME}/bin/luacheck src/
+  - ${HOME}/bin/lua      "test/lua-${TEST}.lua"
+
+after_success:
+  - if [ "${CI}" = "true" && "${TRAVIS_BRANCH}" = "master" ]; then
+      tag=$(git describe --tags --abbrev=0 || echo "0.0")
+      count=$(git rev-list --count HEAD ^"${tag}" || git rev-list --count HEAD)
+    else
+      tag="${TRAVIS_BRANCH}"
+      count=$(git rev-list --count HEAD ^"${tag}" || git rev-list --count HEAD)
+    fi
+    cd rockspec || exit 1
+    sed -e "s/master-1/${tag}-${count}/" \
+        -e "s/master/${tag}/" \
+      "coronest-master-1.rockspec" \
+      > "coronest-${tag}-${count}.rockspec"
+    luarocks upload \
+      --force \
+      --api-key="${LUAROCKS_TOKEN}" \
+      "coronest-${tag}-${count}.rockspec"
+    cd ..
+  - luacov-coveralls \
+      --repo-token "${COVERALLS_TOKEN}" \
+      --exclude share --exclude busted --exclude _spec \
+      --include coronest \
+      --root src/ \
+      --service-name "${TRAVIS_BRANCH}"
 
 notifications:
   email: false
