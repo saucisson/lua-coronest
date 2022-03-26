@@ -12,7 +12,7 @@ local _tagged = setmetatable({}, {__mode = 'kv'})
 
 local _str_tags = setmetatable({}, {__mode = 'v'})
 
-return function(tag)
+return function (tag)
   if type(tag) == 'string' then
      local _tag = _str_tags[tag] or {}
      _str_tags[tag] = _tag
